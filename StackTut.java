@@ -10,7 +10,7 @@ public class StackTut{
         // moving back/forward in web browser
         // backtracking algorithm
         // calling functions
-        StackTut<String> stack = new StackTut<String>();
+        Stack<String> stack = new Stack<String>();
 
         stack.push("Minecraft");
         stack.push("Skyrim");
