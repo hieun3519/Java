@@ -2,7 +2,7 @@ import java.util.Stack;
 
 public class StackTut{
     public static void main(String[] args){
-        // stack - LIFO last in first out
+        // stack - LIFO last in first out like a stack of bookcase
         // push() add
         // pop()  remove
         // usage? 
@@ -17,6 +17,10 @@ public class StackTut{
         stack.push("DOOM");
         stack.push("Borderlands");
         stack.push("FFVII");
+
+        // reach exception if you pop more than what is on
+        // the stack
+
 
         // System.out.println(stack.peek());
         // String myFavGame = stack.pop();
