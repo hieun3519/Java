@@ -1,0 +1,178 @@
+Working on my computer problem when it works on yours but not on others
+Reason:
+1. Missing tools
+2. Different configuration
+3. Hardware dependencies
+
+Tools: Configuration management and Virtual machines as code
+Configuration management
+- require knowledge about hardware and O.S
+Virtual machine as code
+- heavy, slowish, require inconvenient configuration
+
+Docker - uses images and containers to allow apps to run anywhere
+Images - created from lightweight configuration files that describe
+everything the apps need to run
+Containers - virtualized operating systems that are configured just
+enough to run the app
+
+Containers vs Virtual Machines
+
+Virtual Machines virtualize hardware
+- use hypervisor(translate operations on emulated hardware to operations
+to real operations on the host)
+- can take up a lot of space
+- require to install/configure operating system
+- can run multiple apps at the same time
+- cannot interact with their hosts
+
+Containers virtualize operating system kernels
+- Do not emulate any hardware and do not need to boot up
+- Do not require operating system installation
+- Take up less space
+- Only one app at the time
+- Can interact with their hosts
+
+Container composed of linux namespaces and control space
+Namespaces provide different "views" of the system
+Name                Description
+USERNS              User lists
+MOUNT               Access to file systems
+NET                 Network communication
+IPC                 Interprocess communication
+TIME                The ability to change time (not supported by Docker), nm,  m,
+PID                 Process ID Management
+CGROUP              Create control groups
+UTC                 Create host/domain names
+
+
+Control space limits how much you can see
+- monitor and restrict CPU usage
+- monitor and restrict network and disk bandwidth
+- monitor and restrict memory consumption
+- assign disk quotas (not supported by Docker)
+
+Docker Limitations
+- Natively only runs on Linux
+- Container images are bound to their parent O.S
+
+Docker Advantage
+- Dockerfiles amke configuring and packaging apps & their environments easy
+- Docker Hub makes sharing images easy
+
+Entrypoint -instruction on how to start your application
+
+
+command
+docker --help: pull up information, and you can put a command
+
+docker ps (--all): shows the list of containers
+
+docker container create:  does not start containers
+status 0 exited mean it execute successfully
+
+docker container start --attach: start the container and attach it, skip having the logs
+
+docker logs (3 digits from the container id): fetch the logs of the container
+
+
+docker command to create and start, ps and logs explicitly to know it works
+&& - run two commands at once
+
+
+docker build - build an image
+include -t name_of_files --file(or -f) Dockerfilename if we want to use our own file
+if not just do -t name_of_files .
+. meaning if it was in the working directory or just link the directory
+
+
+docker ps - show running container(s)
+-a all running container
+-q only ids
+| (pipeline) feed the output (left) to the command on the right
+TO REMOVE ALL id
+docker ps -aq | xargs docker rm (however not on powershell)
+docker rm $(docker ps -aq)
+
+
+docker run - run the image
+docker run = docker container create + docker container start + docker container attach
+-d if you don't want to attach container onto the terminal(run in the background)
+--name write a name for the container
+-p bind it to a port number of your choice (outside the container, inside the container)
+docker run -d --name our-web-server -p 5001:5000 our-web-server
+--entrypoint sh to run a shell command
+--volume create a from folder outside the machine and inside within the container
+infinity - run for well infinity time
+use a non-root users when running containers
+docker run --rm -it --user somebody-else
+
+docker kill id - end the process
+
+docker exec - run a command in a running container
+--interactive -tty id (bash or anything) and CTRL + D to exit
+can also do sh
+
+docker stop - stop a container(s)
+-t forcefully stop (might cause data loss)
+
+docker rm - remove container and stop it
+-f forcefully remove
+
+docker images - show images
+
+docker rmi - remove images
+-f
+
+DOCKER CONTAINER REGISTRIES
+docker login -login to your dockerhub account
+
+docker tag - rename docker image
+docker tag our-web-server hieun3519/our-web-server:0.0.1
+
+docker push - push the image to dockerhub
+docker push hieun3519/our-web-server:0.0.1
+
+DEBUGGING
+docker system prune - remove useless data 
+
+docker stats - snapshot of your container performance
+
+docker top - show what is running inside the container without docker exec
+
+docker inspect - show container in JSON format
+can pipeline with | less to show less information
+
+docker compose - starting and connecting multiple containers
+
+In a docker file
+FROM - which existing docker image is based off from
+LABEL - adding additional data
+USER - which user Docker will use for any Docker file commands
+COPY - copies files from a directory provided to the docker build command to the container image
+directory docker provided is called the context
+RUN - commands that customize the image (install additional software)
+USER (again) - set the default user to insure nobody can change the file from the host
+ENTRYPOINT - tell docker what command containers created from this image should run
+
+Intermediate image - image for every command
+Final image - squash all images into one
+
+
+Port binding
+Docker take the port on the machine and map it to a port within a container
+
+Container Registries (Dockerhub)
+Push your images to the registries
+Container image tags consist of the name of the string, a colon, and its version (or the latest)
+
+Only download images with docker verify
+image scanners to verify if verified image isn't possible
+-clair, trivy, dagda
+avoid tagging with latest instead use version
+latest can be change and overridden
+
+Container orchestrators
+- create, move, and scale containers across cluster of hosts
+Kubernetes
+- makes load balancing and securing container traffic to/from the outside world

@@ -12,7 +12,7 @@ public class DynamicArrayTut {
     //
     // disadvantages?
     // waste more memory than linked list
-    // shifting elemetns is time consuming O(n)
+    // shifting elements is time consuming O(n)
     // expanding/shrinking is time consuming O(n)
 
     public static void main(String[] args){
