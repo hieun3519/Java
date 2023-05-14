@@ -30,26 +30,29 @@ public class serverSocket {
                 buffW = new BufferedWriter(outputStreamWriter);
 
 
+                // problem: user not able to see the message until
+                // they input something
+                // server need to print out to user's side not server
+                //
                 buffW.write("Pick your option:" +
                         "1. Ping local host/n 2. Ping google/n 3.");
                 buffW.newLine();
                 buffW.flush();
 
                 InetAddress address;
-
+                String hostIP = "";
                 while (true) {
 
                     // read the input from the user
                     String message = buffR.readLine();
                     System.out.println("Client: " + message);
-                    
+
                         switch (message) {
                               //pinging local host
                               case "1":
-                                  String localHost = "127.0.0.1";
-                                  address = InetAddress.getByName(localHost);
+                                  address = InetAddress.getLocalHost();
                                   if(address.isReachable(2000)){
-                                      System.out.println("Hello from local host");
+                                      System.out.println("Hello from local host: " + address);
                                   } else {
                                       System.out.println("Local host is unreachable");
                                   }
@@ -60,7 +63,11 @@ public class serverSocket {
                                   System.out.println("Website name: " + address.getHostName());
                                   System.out.println("Website address: " + address.getHostAddress());
                                  break;
+                                 // get local host ip
                               case "3":
+                                  address = InetAddress.getLocalHost();
+                                  hostIP = address.getHostAddress();
+                                  System.out.println("Host address: " + hostIP);
                                   break;
                               case "4":
                                   buffW.write("Server: Goodbye");

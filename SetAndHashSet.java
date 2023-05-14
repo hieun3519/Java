@@ -54,5 +54,21 @@ public class SetAndHashSet {
         System.out.println(numberSet);
 
 
+        int [] data = {4,3,6, 5,7,8};
+        int target = 5;
+        int [] copydata = new int[data.length];
+        HashSet<Integer> setInt = new HashSet<>();
+
+        for(int i=0; i< data.length; i++){
+            if(!setInt.contains(target)){
+                setInt.add(data[i]);
+                System.out.println("empty");
+            }
+
+                System.out.println("true");
+
+        }
+
+
     }
 }

@@ -12,7 +12,7 @@ public class movezero {
                 nums[i-snowBall] =t;
             }
             }
-
+        System.gc();
     }
 
     public static void main(String[] args){
