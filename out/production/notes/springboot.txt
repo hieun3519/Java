@@ -1,0 +1,9 @@
+Client will submit a request either GET, POST, DELETE, PUT
+where the API Layer/ Controller Layer will receive those request
+Then it be send to Service layer where it handle the business logic
+Business logic is logic involving real world application
+After that you can decide on what database to peforme CRUD opperation  
+(CRUD- create, read, update, and delete) on the Data Access Layer
+A response will then be send back to the Client
+
+start.spring.io

@@ -36,13 +36,17 @@ public class clientSocket {
             Scanner input = new Scanner(System.in);
 
             while(true) {
+                // keep looping this
+                // need a way to asked if user want to keep going or quit
+                // maybe another while loop
+                System.out.println("Server: " + buffR.readLine());
                 String readMessage = input.nextLine();
 
                 buffW.write(readMessage);
                 buffW.newLine();
                 buffW.flush();
 
-                System.out.println("Server: " + buffR.readLine());
+
 
                 if(readMessage.equalsIgnoreCase("4")){
                     break;

@@ -34,10 +34,13 @@ public class serverSocket {
                 // they input something
                 // server need to print out to user's side not server
                 //
-                buffW.write("Pick your option:" +
-                        "1. Ping local host/n 2. Ping google/n 3.");
+                buffW.write(String.format("Pick your option:%n "));
+
+                buffW.write("1. Ping local host 2. Ping google 3. Get local host ip 4. Exit");
                 buffW.newLine();
                 buffW.flush();
+
+
 
                 InetAddress address;
                 String hostIP = "";
@@ -52,7 +55,10 @@ public class serverSocket {
                               case "1":
                                   address = InetAddress.getLocalHost();
                                   if(address.isReachable(2000)){
-                                      System.out.println("Hello from local host: " + address);
+                                      // System.out.println("Hello from local host: " + address);
+                                      buffW.write("Hello from local host: " + address);
+                                      buffW.newLine();
+                                      buffW.flush();
                                   } else {
                                       System.out.println("Local host is unreachable");
                                   }
