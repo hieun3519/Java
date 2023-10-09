@@ -24,8 +24,10 @@ public class quickSort {
     }
     private static int partition(int[] arr, int start, int end){
         int pivot = arr[end];
+        // start before the array
         int i = start - 1;
 
+        // swap if j is less than pivot
         for(int j = start; j <= end - 1; j++){
             if(arr[j] < pivot) {
                 i++;
