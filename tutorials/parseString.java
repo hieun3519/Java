@@ -1,3 +1,4 @@
+package tutorials;
 import java.io.*;
 
 public class parseString {
